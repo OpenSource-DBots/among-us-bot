@@ -1,8 +1,7 @@
+from cogs.voice_activity import VoiceActivity
 from datetime import datetime
-
 from discord.ext import commands
 import discord
-
 import json
 
 
@@ -53,10 +52,17 @@ def get_current_time() -> str:
 
 
 @client.event
+async def on_connect():
+    print(f'[{get_current_time()}] Bot \'{client.user.name}\' is connecting!')
+
+
+@client.event
 async def on_ready():
     print(f'[{get_current_time()}] Bot \'{client.user.name}\' is now up and running!')
     await client.change_presence(
         activity=discord.Activity(type=discord.ActivityType.watching, name=get_json('watching_status')))
+
+    client.add_cog(VoiceActivity(client))
 
 
 startup()
