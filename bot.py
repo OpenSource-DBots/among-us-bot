@@ -43,12 +43,15 @@ def bot_basic_info():
 
 class Client(discord.Client):
 
+    """
+    Run the Discord bot
+    """
     def run(self):
         bot_ascii_art()
         bot_basic_info()
 
-        try:
-            self.loop.run_until_complete(self.start(self.token))
+        try:  # Start the discord bot
+            self.loop.run_until_complete(self.start(self.bot_token))
         except discord.LoginFailure:
             logging.critical('Invalid token')
 
@@ -59,11 +62,17 @@ class Client(discord.Client):
         print(f'[{get_time()}] \'{self.user}\' has connected!')
 
     @property
-    def token(self) -> str:
+    def bot_token(self) -> str:
         with open('./token.secret') as cfg:
             token = cfg.read()
             return token
 
+    """
+    Summary:
+        Get the current time as h:m:s
+    Returns:
+        The current time as h:m:s
+    """
     @property
     def get_time(self) -> str:
         current_time = datetime.now()
