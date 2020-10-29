@@ -60,6 +60,9 @@ class Client(discord.Client):
 
     async def on_ready(self):
         print(f'[{get_time()}] \'{self.user}\' has connected!')
+        await self.change_presence(
+            status=discord.Status.online,
+            activity=discord.Activity(type=discord.ActivityType.watching, name='out for imposters'))
 
     @property
     def bot_token(self) -> str:
