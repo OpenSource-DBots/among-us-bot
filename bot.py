@@ -1,4 +1,5 @@
 from datetime import datetime
+from discord.ext import commands
 import discord
 import json
 import logging
@@ -41,7 +42,13 @@ def bot_basic_info():
         print(f'Author: {raw_json["author"]} | Discord: {raw_json["discord"]} | Version: {raw_json["version"]}')
 
 
-class Client(discord.Client):
+class Client(commands.Bot):
+
+    client = commands.Bot(command_prefix='.')
+
+    def __init__(self):
+        super().__init__(command_prefix='.')
+        self.load_extensions()
 
     """
     Run the Discord bot
@@ -54,6 +61,19 @@ class Client(discord.Client):
             self.loop.run_until_complete(self.start(self.bot_token))
         except discord.LoginFailure:
             logging.critical('Invalid token')
+
+    """
+    Load every cog class
+    """
+    def load_extensions(self):
+        extensions = ['cogs.among_us']
+
+        for extension in extensions:
+            try:
+                self.load_extension(extension)
+                print(f'[{get_time()}] Cog \'{extension}\' was successfully loaded!')
+            except Exception as error:
+                print(f'[{get_time()}] Cog \'{extension}\' cannot be loaded. Error: {error}')
 
     async def on_connect(self):
         print(f'[{get_time()}] \'{self.user}\' is connecting to the Discord services!')
