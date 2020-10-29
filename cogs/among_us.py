@@ -15,7 +15,7 @@ class AmongUs(commands.Cog):
                             f'`{self.party_leader.voice.channel.name}`!',
                 color=discord.Color.from_rgb(0, 125, 0))
             can_be_party_leader = True
-        except Exception: # Failed to assign the member as party leader
+        except Exception:  # Failed to assign the member as party leader
             embed = discord.Embed(
                 description=f'{self.party_leader.mention}, please join a voice-channel to be able claiming **Party Leader**.',
                 color=discord.Color.from_rgb(125, 0, 0))
