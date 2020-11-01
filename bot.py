@@ -51,7 +51,8 @@ class Client(commands.Bot):
         self.load_extensions()
 
     """
-    Run the Discord bot
+    Summary:
+        Run the Discord bot
     """
     def run(self):
         bot_ascii_art()
@@ -63,7 +64,8 @@ class Client(commands.Bot):
             logging.critical('Invalid token')
 
     """
-    Load every cog class
+    Summary:
+        Load every cog class
     """
     def load_extensions(self):
         extensions = ['cogs.among_us']
