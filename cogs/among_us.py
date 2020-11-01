@@ -40,7 +40,8 @@ class AmongUs(commands.Cog):
             if self.party_leader == ctx.author:
                 await send_discord_embed(
                     ctx=ctx,
-                    description=f'{ctx.author.mention}, you are already a **Party Leader** of `{ctx.author.voice.channel.name}`',
+                    description=f'{ctx.author.mention}, you are already a **Party Leader** of '
+                                f'`{ctx.author.voice.channel.name}.`',
                     color=discord.Color.from_rgb(125, 0, 0))
 
                 return
@@ -49,7 +50,7 @@ class AmongUs(commands.Cog):
                 await send_discord_embed(
                     ctx=ctx,
                     description=f'{ctx.author.mention}, **Party Leader** has already claimed by '
-                                f'{self.party_leader.mention}',
+                                f'{self.party_leader.mention}.',
                     color=discord.Color.from_rgb(125, 0, 0))
 
                 return
@@ -57,7 +58,7 @@ class AmongUs(commands.Cog):
             await send_discord_embed(
                 ctx=ctx,
                 description=f'{ctx.author.mention}, you are the **Party Leader** in '
-                            f'`{ctx.author.voice.channel.name}`!',
+                            f'`{ctx.author.voice.channel.name}`.',
                 color=discord.Color.from_rgb(0, 125, 0))
 
             can_be_party_leader = True
@@ -67,7 +68,7 @@ class AmongUs(commands.Cog):
             await send_discord_embed(
                 ctx=ctx,
                 description=f'{ctx.author.mention}, please join a voice-channel to be able claiming **Party Leader**.'
-                            f'If you are, there went something wrong.',
+                            f'\nIf you are the **Party Leader**, there went something wrong.',
                 color=discord.Color.from_rgb(125, 0, 0))
 
             can_be_party_leader = False
@@ -77,6 +78,30 @@ class AmongUs(commands.Cog):
             self.party_leader = ctx.author
         else:
             self.party_leader = discord.Member
+
+    @commands.command(name='unclaim')
+    async def unclaim(self, ctx):
+        try:
+            if ctx.author == self.party_leader:
+                self.party_leader = None
+
+                await send_discord_embed(
+                    ctx=ctx,
+                    description=f'{ctx.author.mention}, you are no longer the **Party Leader** in '
+                                f'`{ctx.author.voice.channel.name}`.',
+                    color=discord.Color.from_rgb(0, 125, 0))
+            else:
+                await send_discord_embed(
+                    ctx=ctx,
+                    description=f'{ctx.author.mention}, you are not the **Party Leader** in '
+                                f'`{ctx.author.voice.channel.name}`.',
+                    color=discord.Color.from_rgb(125, 0, 0))
+        except Exception:
+            await send_discord_embed(
+                ctx=ctx,
+                description=f'{ctx.author.mention}, please join a voice-channel to be able to unclaim **Party Leader**.'
+                            f'\nIf you are, there went something wrong.',
+                color=discord.Color.from_rgb(125, 0, 0))
 
     """
     Summary:
