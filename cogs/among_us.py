@@ -29,5 +29,16 @@ class AmongUs(commands.Cog):
 
         await ctx.send(embed=embed)
 
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member, before, after):
+        if member == self.party_leader:
+            for user in self.get_users_in_channel(member.voice.channel.id):
+                if member != user:
+                    await user.edit(mute=self.party_leader.voice.self_mute)
+
+    def get_users_in_channel(self, channel_id) -> list:
+        members = self.client.get_channel(channel_id).members
+        return members
+
 def setup(client):
     client.add_cog(AmongUs(client))
