@@ -69,7 +69,7 @@ class Client(commands.Bot):
         Load every cog class
     """
     def load_extensions(self):
-        extensions = ['cogs.among_us']
+        extensions = ['cogs.among_us', 'cogs.utils']
 
         for extension in extensions:
             try:
