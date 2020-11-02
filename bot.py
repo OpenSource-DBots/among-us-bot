@@ -45,10 +45,10 @@ def bot_basic_info():
 
 class Client(commands.Bot):
 
-    client = commands.Bot(command_prefix='.')
+    client = commands.Bot(command_prefix='au.')
 
     def __init__(self):
-        super().__init__(command_prefix='.')
+        super().__init__(command_prefix='au.')
         self.load_extensions()
 
     """
@@ -85,7 +85,8 @@ class Client(commands.Bot):
         print(f'[{get_time()}] \'{self.user}\' has connected!')
         await self.change_presence(
             status=discord.Status.online,
-            activity=discord.Activity(type=discord.ActivityType.watching, name='out for imposters | .help'))
+            activity=discord.Activity(type=discord.ActivityType.watching, name=f'out for imposters | '
+                                                                               f'{self.client.command_prefix}help'))
 
     @property
     def bot_token(self) -> str:
@@ -104,6 +105,8 @@ class Client(commands.Bot):
         current_time = datetime.now()
         return current_time.strftime('%H:%M:%S')
 
+    def set_prefix(self, prefix):
+        self.command_prefix = prefix
 
 def main():
     client = Client()
