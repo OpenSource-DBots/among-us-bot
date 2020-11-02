@@ -10,7 +10,7 @@ class Utils(commands.Cog):
 
     @commands.command(name='help', aliases=['h', 'info'])
     async def help(self, ctx):
-        embed = discord.Embed(title='Among Us Bot Information')
+        embed = discord.Embed(title='Among Us Bot Information', color=discord.Color.from_rgb(0, 125, 0))
         embed.set_thumbnail(url=self.client.user.avatar_url)
         embed.add_field(name='Standard Commands',
                         value='.claim\n'
@@ -20,14 +20,15 @@ class Utils(commands.Cog):
                         value='.prefix',
                         inline=True)
         embed.add_field(name='How does this bot work?',
-                        value='There must be one **Party Leader** to control the other voice activity in the claimed '
-                              'channel. You can claim a voice channel by entering it and typing `.claim`. This command '
-                              'will assign you as **Party Leader** in that voice channel you are in. If you want to '
-                              'give the Party Leader to someone else - simply type `.unclaim` so someone else can '
-                              'claim it.',
+                        value='You have to join a voice channel in order to `.claim` it. When you have claimed the '
+                              'voice channel - whenever you mute yourself, the other will be muted as well. And '
+                              'whenever you unmute yourself, the other will be unmuted as well. If you do not want to '
+                              'be a party leader anymore, simply type `.unclaim`.\n'
+                              'If you want to see this message again type `.help`.',
                         inline=False)
         embed.add_field(name='Invite Bot',
-                        value=f'[Link](https://discord.com/api/oauth2/authorize?client_id=771021720240783386&permissions=4212736&scope=bot)',
+                        value=f'[Link](https://discord.com/api/oauth2/authorize?'
+                              f'client_id=771021720240783386&permissions=4212736&scope=bot)',
                         inline=True)
         embed.add_field(name='Support',
                         value=f'[Join](https://discord.gg/E6yuVmwxGM)',
@@ -38,9 +39,13 @@ class Utils(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(name='set-prefix', aliases=['setprefix', 'sp', 'prefix'])
-    async def set_prefix(self, ctx, prefix):
-        pass
+    @commands.command(name='prefix')
+    async def set_prefix(self, ctx, *, prefix):
+        embed = discord.Embed(
+            description='This command has not been created yet.',
+            color=discord.Color.from_rgb(125, 0, 0)
+        )
+        await ctx.send(embed=embed)
 
 
 def setup(client):
