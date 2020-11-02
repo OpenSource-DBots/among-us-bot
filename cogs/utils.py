@@ -32,6 +32,9 @@ class Utils(commands.Cog):
         embed.add_field(name='Support',
                         value=f'[Join](https://discord.gg/E6yuVmwxGM)',
                         inline=True)
+        embed.add_field(name='Creator',
+                        value=f'[Lars#7391](https://discord.gg/E6yuVmwxGM)',
+                        inline=True)
 
         await ctx.send(embed=embed)
 
