@@ -42,7 +42,7 @@ class AmongUs(commands.Cog):
                     ctx=ctx,
                     description=f'{ctx.author.mention}, you are already a **Party Leader** of '
                                 f'`{ctx.author.voice.channel.name}.`',
-                    color=discord.Color.from_rgb(125, 0, 0))
+                    color=discord.Color.from_rgb(255, 0, 0))
 
                 return
             # Make sure no one else can claim party leader if there is already one
@@ -51,7 +51,7 @@ class AmongUs(commands.Cog):
                     ctx=ctx,
                     description=f'{ctx.author.mention}, **Party Leader** has already claimed by '
                                 f'{self.party_leader.mention}.',
-                    color=discord.Color.from_rgb(125, 0, 0))
+                    color=discord.Color.from_rgb(255, 0, 0))
 
                 return
 
@@ -59,7 +59,7 @@ class AmongUs(commands.Cog):
                 ctx=ctx,
                 description=f'{ctx.author.mention}, you are the **Party Leader** in '
                             f'`{ctx.author.voice.channel.name}`.',
-                color=discord.Color.from_rgb(0, 125, 0))
+                color=discord.Color.from_rgb(0, 255, 0))
 
             can_be_party_leader = True
 
@@ -69,7 +69,7 @@ class AmongUs(commands.Cog):
                 ctx=ctx,
                 description=f'{ctx.author.mention}, please join a voice-channel to be able claiming **Party Leader**.'
                             f'\nIf you are the **Party Leader**, there went something wrong.',
-                color=discord.Color.from_rgb(125, 0, 0))
+                color=discord.Color.from_rgb(255, 0, 0))
 
             can_be_party_leader = False
 
@@ -89,19 +89,19 @@ class AmongUs(commands.Cog):
                     ctx=ctx,
                     description=f'{ctx.author.mention}, you are no longer the **Party Leader** in '
                                 f'`{ctx.author.voice.channel.name}`.',
-                    color=discord.Color.from_rgb(0, 125, 0))
+                    color=discord.Color.from_rgb(0, 255, 0))
             else:
                 await send_discord_embed(
                     ctx=ctx,
                     description=f'{ctx.author.mention}, you are not the **Party Leader** in '
                                 f'`{ctx.author.voice.channel.name}`.',
-                    color=discord.Color.from_rgb(125, 0, 0))
+                    color=discord.Color.from_rgb(255, 0, 0))
         except Exception:
             await send_discord_embed(
                 ctx=ctx,
                 description=f'{ctx.author.mention}, please join a voice-channel to be able to unclaim **Party Leader**.'
                             f'\nIf you are, there went something wrong.',
-                color=discord.Color.from_rgb(125, 0, 0))
+                color=discord.Color.from_rgb(255, 0, 0))
 
     """
     Summary:
