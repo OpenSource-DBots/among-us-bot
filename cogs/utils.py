@@ -43,26 +43,29 @@ class Utils(commands.Cog):
     @commands.command(name='prefix')
     @commands.has_permissions(administrator=True)
     async def set_prefix(self, ctx, *, prefix=None):
-        if prefix is not None:
-            try:
-                self.client.set_prefix(prefix=prefix)
+        if prefix is None:
+            return
 
-                # Update the prefix in the bot presence
-                await self.client.change_presence(
-                    status=discord.Status.online,
-                    activity=discord.Activity(type=discord.ActivityType.watching,
-                                              name=f'out for imposters | {self.client.command_prefix}help'))
+        try:
+            # Set the new prefix
+            self.client.set_prefix(prefix=prefix)
 
-                embed = discord.Embed(
-                    description=f'The prefix has been changed to `{prefix}`',
-                    color=discord.Color.from_rgb(0, 255, 0)
-                )
-                await ctx.send(embed=embed)
+            # Update the prefix in the bot presence
+            await self.client.change_presence(
+                status=discord.Status.online,
+                activity=discord.Activity(type=discord.ActivityType.watching,
+                                          name=f'out for imposters | {self.client.command_prefix}help'))
 
-                return
+            embed = discord.Embed(
+                description=f'The prefix has been changed to `{prefix}`',
+                color=discord.Color.from_rgb(0, 255, 0)
+            )
+            await ctx.send(embed=embed)
 
-            except Exception:
-                pass
+            return
+
+        except Exception:
+            pass
 
         embed = discord.Embed(
             description=f'Please use the valid format: `{self.client.command_prefix}prefix <prefix>`',
